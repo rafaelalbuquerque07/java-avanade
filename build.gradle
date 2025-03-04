@@ -1,0 +1,97 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.3'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'application'  // Adicionado plugin de aplicação
+}
+
+group = 'com.java_avanade'
+version = '0.0.1-SNAPSHOT'
+
+// Configuração da classe principal
+application {
+	mainClass = 'com.java_avanade.Application'
+}
+
+// Configuração moderna do Java 17
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+// Configurações para processadores de anotações (Lombok)
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Spring Boot Core
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// Banco de Dados
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// JWT para autenticação
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	// Documentação API com Swagger/OpenAPI
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
+	// Lombok para redução de boilerplate
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// Spring AOP (para middlewares/aspectos)
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	// Testes
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+// Configuração adicional para execução da aplicação
+bootRun {
+	mainClass = 'com.java_avanade.Application'
+}
+
+bootJar {
+	mainClass = 'com.java_avanade.Application'
+}
+
+// Configuração do manifest para o JAR
+tasks.jar {
+	manifest {
+		attributes["Main-Class"] = "com.java_avanade.Application"
+	}
+}
+
+// Configuração Docker (opcional)
+// Para criar imagem Docker com o Gradle
+// plugins {
+//     id 'com.palantir.docker' version '0.35.0'
+// }
+// docker {
+//     name "${project.group}/${project.name}:${project.version}"
+//     files bootJar.archiveFile
+//     buildArgs(['JAR_FILE': "${bootJar.archiveFileName.get()}"])
+// }

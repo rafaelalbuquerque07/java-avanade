@@ -1,0 +1,75 @@
+# Sistema de controle de versão
+.git
+.gitignore
+.github
+.gitattributes
+
+# Gradle
+.gradle
+**/build/
+!src/**/build/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# IDEs e editores
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.iws
+*.iml
+*.ipr
+nbproject/
+.DS_Store
+Thumbs.db
+
+# Arquivos de log
+logs/
+*.log
+npm-debug.log*
+
+# Arquivos de ambiente local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/application-local.properties
+**/application-local.yml
+
+# Arquivos de teste
+**/src/test/
+**/test/
+**/integrationTest/
+
+# Arquivos de documentação
+README.md
+CHANGELOG.md
+LICENSE
+CONTRIBUTING.md
+docs/
+*.md
+
+# Arquivos Docker (exceto Dockerfile e docker-compose.yml)
+.dockerignore
+
+# Outros
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+coverage/
+node_modules/
+dist/
+tmp/
+out/
+bin/

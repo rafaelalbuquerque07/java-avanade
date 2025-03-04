@@ -1,0 +1,100 @@
+# Configuração de normalização de final de linha
+# Garante comportamento consistente em diferentes sistemas operacionais
+* text=auto eol=lf
+
+# Arquivos de origem Java
+*.java text diff=java
+*.groovy text diff=java
+*.kt text diff=kotlin
+
+# Arquivos XML
+*.xml text diff=xml
+*.xsd text diff=xml
+*.xsl text diff=xml
+
+# Arquivos de script
+*.sh text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+gradlew text eol=lf
+mvnw text eol=lf
+
+# Arquivos de configuração
+*.properties text
+*.yml text
+*.yaml text
+*.json text
+*.conf text
+*.config text
+*.ini text
+
+# Arquivos da web
+*.htm text diff=html
+*.html text diff=html
+*.css text diff=css
+*.js text
+*.ts text
+*.jsp text
+*.jspf text
+*.tld text
+
+# Arquivos de documentação
+*.md text diff=markdown
+*.adoc text
+*.txt text
+LICENSE text
+AUTHORS text
+CHANGELOG text
+CONTRIBUTING text
+NOTICE text
+
+# Arquivos de versionamento 
+.gitattributes text
+.gitignore text
+
+# Arquivos de configuração do Gradle
+*.gradle text diff=java
+gradle.properties text
+settings.gradle text
+
+# Arquivos de configuração do Maven
+pom.xml text diff=xml
+
+# Arquivos de configuração do IntelliJ
+*.iml text
+*.xml text
+
+# Arquivos de configuração do Eclipse
+.classpath text
+.project text
+.settings/* text
+
+# Marcar arquivos binários para que não sejam modificados
+# Imagens
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+
+# Documentos
+*.pdf binary
+
+# Arquivos compactados
+*.jar binary
+*.war binary
+*.zip binary
+*.tar binary
+*.tar.gz binary
+*.gz binary
+*.rar binary
+
+# Arquivos do Gradle Wrapper
+gradle/wrapper/gradle-wrapper.jar binary
+
+# Detecção de linguagem para estatísticas do GitHub
+*.java linguist-language=Java
+*.kt linguist-language=Kotlin
+*.gradle linguist-language=Groovy
+*.md linguist-documentation

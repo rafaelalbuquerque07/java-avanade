@@ -1,0 +1,99 @@
+spring:
+  # Configurações do perfil ativo
+  profiles:
+    active: dev
+
+  # Configurações comuns para todos os perfis
+  application:
+    name: eco-diapers-api
+
+  # Configurações do JPA comuns (sem dialeto específico)
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        # Remova o dialeto daqui, deixe cada perfil definir o seu próprio
+
+# Configurações do servidor
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  error:
+    include-stacktrace: never
+
+# Configurações do JWT
+app:
+  jwt:
+    secret: segredoSuperSeguroParaJwtQuePrecisaSerLongoParaSerSeguro
+    expiration: 86400000  # 24 horas em milissegundos
+
+# Configurações do Swagger
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+---
+# Perfil de desenvolvimento
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  # Configurações do banco de dados H2
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  datasource:
+    url: jdbc:h2:mem:ecodiapersdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+# Configuração de logging para desenvolvimento
+logging:
+  level:
+    root: INFO
+    com.java_avanade: DEBUG
+    org.springframework.web: INFO
+    org.hibernate: INFO
+
+---
+# Perfil de produção
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  # Configurações do banco de dados PostgreSQL
+  datasource:
+    url: ${DATABASE_URL:postgresql://postgres:hQwXVCTTfYhpwjLoStqmQrlVOwZxuuNy@postgres.railway.internal:5432/railway}
+    username: ${PGUSER:postgres}
+    password: ${PGPASSWORD:hQwXVCTTfYhpwjLoStqmQrlVOwZxuuNy}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 20000
+
+  # Configuração do dialeto específico para PostgreSQL apenas no perfil de produção
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# Configuração de logging para produção
+logging:
+  level:
+    root: WARN
+    com.java_avanade: INFO
+    org.springframework.web: WARN
+    org.hibernate: WARN
